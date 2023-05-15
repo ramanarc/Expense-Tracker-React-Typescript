@@ -5,15 +5,19 @@ import ExpenseList from './components/ExpenseList'
 
 function App() {
   const [expenses, setExpenses] = useState([
-    { id: 1, description: 'Fruits', amount: 25, category: 'Groceries' },
-    { id: 2, description: 'Popcorn', amount: 25, category: 'Utilities' },
-    { id: 1, description: 'Netflix', amount: 25, category: 'Entertainment' },
-    { id: 1, description: 'Rent', amount: 25, category: 'Housing' },
+    { id: 1, description: 'Fruits', amount: 150, category: 'Groceries' },
+    { id: 2, description: 'Popcorn', amount: 80, category: 'Utilities' },
+    { id: 3, description: 'Netflix', amount: 1500, category: 'Entertainment' },
+    { id: 4, description: 'Rent', amount: 12500, category: 'Housing' },
   ])
+
+  const handleDelete = (id: number) => {
+    setExpenses(expenses.filter((e) => e.id !== id))
+  }
 
   return (
     <>
-      <ExpenseList expenses={expenses} />
+      <ExpenseList expenses={expenses} onDelete={handleDelete} />
     </>
   )
 }

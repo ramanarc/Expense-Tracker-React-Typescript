@@ -13,6 +13,9 @@ interface Props {
 }
 
 const ExpenseList = ({ expenses, onDelete }: Props) => {
+
+  if (expenses.length === 0) return null;
+
   return (
     <TableContainer p={4}>
       <Table size='lg' variant='striped' colorScheme='gray'>
