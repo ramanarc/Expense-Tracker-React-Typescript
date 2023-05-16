@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ExpenseList from './components/ExpenseList'
+import ExpenseFilter from './components/ExpenseFilter'
 
 
 
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+      <ExpenseFilter />
       <ExpenseList expenses={expenses} onDelete={handleDelete} />
     </>
   )
