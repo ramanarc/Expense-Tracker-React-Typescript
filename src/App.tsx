@@ -12,14 +12,19 @@ function App() {
     { id: 4, description: 'Rent', amount: 12500, category: 'Housing' },
   ])
 
+  const [selectedCategory, setSelectedCategory] = useState('')
+
   const handleDelete = (id: number) => {
     setExpenses(expenses.filter((e) => e.id !== id))
   }
 
+  // Implement filtered expenses functionality
+  const filteredExpenses = selectedCategory ? expenses.filter((expense) => expense.category === selectedCategory) : expenses;
+
   return (
     <>
-      <ExpenseFilter />
-      <ExpenseList expenses={expenses} onDelete={handleDelete} />
+      <ExpenseFilter onSelectCategory={(category) => setSelectedCategory(category)} />
+      <ExpenseList expenses={filteredExpenses} onDelete={handleDelete} />
     </>
   )
 }
