@@ -1,4 +1,5 @@
 import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from "@chakra-ui/react"
+import { categories } from "../App";
 
 const ExpenseInputForm = () => {
   return (
@@ -24,10 +25,8 @@ const ExpenseInputForm = () => {
         <FormControl isRequired marginBottom={4}>
           <FormLabel fontWeight='bold'>What's the expense category?</FormLabel>
           <Select>
-            <option>Groceries</option>
-            <option>Utilities</option>
-            <option>Entertainment</option>
-            <option>Housing</option>
+            <option></option>
+            {categories.map((category) => <option key={category} value={category}>{category}</option>)}
           </Select>
         </FormControl>
         <Button mt={4} colorScheme='blue' type='submit'>
