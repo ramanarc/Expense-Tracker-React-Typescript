@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import ExpenseList from './components/ExpenseList'
 import ExpenseFilter from './components/ExpenseFilter'
+import ExpenseInputForm from './components/ExpenseInputForm'
+import { Box, Divider } from '@chakra-ui/react'
 
 
 
@@ -22,10 +24,12 @@ function App() {
   const filteredExpenses = selectedCategory ? expenses.filter((expense) => expense.category === selectedCategory) : expenses;
 
   return (
-    <>
+    <Box m={4}>
+      <ExpenseInputForm />
+      <Divider m={4} />
       <ExpenseFilter onSelectCategory={(category) => setSelectedCategory(category)} />
       <ExpenseList expenses={filteredExpenses} onDelete={handleDelete} />
-    </>
+    </Box>
   )
 }
 
