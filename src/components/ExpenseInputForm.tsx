@@ -13,7 +13,8 @@ const schema = z.object({
 type ExpenseFormData = z.infer<typeof schema>
 
 const ExpenseInputForm = () => {
-  const { register, handleSubmit } = useForm();
+
+  const { register, handleSubmit, formState: { errors } } = useForm<ExpenseFormData>({ resolver: zodResolver(schema) })
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
@@ -24,12 +25,12 @@ const ExpenseInputForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isRequired marginBottom={4}>
           <FormLabel fontWeight='bold'>Description</FormLabel>
-          <Input placeholder='Enter expense description' />
+          <Input {...register('description')} placeholder='Enter expense description' />
         </FormControl>
         <FormControl isRequired marginBottom={4}>
           <FormLabel fontWeight='bold'>Amount</FormLabel>
           <NumberInput min={1}>
-            <NumberInputField />
+            <NumberInputField  {...register('amount')} />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
@@ -38,7 +39,7 @@ const ExpenseInputForm = () => {
         </FormControl>
         <FormControl isRequired marginBottom={4}>
           <FormLabel fontWeight='bold'>What's the expense category?</FormLabel>
-          <Select>
+          <Select {...register('category')}>
             <option></option>
             {categories.map((category) => <option key={category} value={category}>{category}</option>)}
           </Select>
