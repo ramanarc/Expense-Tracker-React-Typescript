@@ -4,7 +4,7 @@ import ExpenseFilter from './components/ExpenseFilter'
 import ExpenseInputForm from './components/ExpenseInputForm'
 import { Box, Divider } from '@chakra-ui/react'
 
-export const categories = ['Groceries', 'Utilities', 'Entertainment', 'Housing'];
+export const categories = ['Groceries', 'Utilities', 'Entertainment', 'Housing'] as const;
 
 function App() {
   const [expenses, setExpenses] = useState([

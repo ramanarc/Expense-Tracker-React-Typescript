@@ -1,13 +1,27 @@
 import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from "@chakra-ui/react"
 import { categories } from "../App";
+import { FieldValues, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from 'zod';
+
+const schema = z.object({
+  description: z.string().min(3).max(50),
+  amount: z.number().min(0.01).max(100_000),
+  category: z.enum(categories)
+})
+
+type ExpenseFormData = z.infer<typeof schema>
 
 const ExpenseInputForm = () => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+  }
+
   return (
     <Box p={4}>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        console.log(e.target)
-      }}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isRequired marginBottom={4}>
           <FormLabel fontWeight='bold'>Description</FormLabel>
           <Input placeholder='Enter expense description' />
@@ -33,7 +47,7 @@ const ExpenseInputForm = () => {
           Submit
         </Button>
       </form>
-    </Box>
+    </Box >
   )
 }
 
